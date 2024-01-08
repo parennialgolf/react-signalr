@@ -1,7 +1,6 @@
-import hermes from "hermes-channel";
 import { useEffect } from "react";
 import { Context, Hub } from "./types";
-import { useEvent } from "../utils";
+import { useEvent } from "./utils";
 
 function createUseSignalREffect<T extends Hub>(context: Context<T>) {
   const useSignalREffect = <T extends string, C extends (...args: any) => void>(
@@ -14,12 +13,10 @@ function createUseSignalREffect<T extends Hub>(context: Context<T>) {
         callbackRef(...args);
       }
 
-      context.on?.(event);
-      hermes.on(event, _callback);
+      context.on?.(event, _callback);
 
       return () => {
         context.off?.(event);
-        hermes.off(event, _callback);
       };
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

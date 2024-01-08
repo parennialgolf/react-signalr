@@ -4,6 +4,20 @@ import {
   HubConnectionState,
   IHttpConnectionOptions,
 } from "@microsoft/signalr";
+import { useCallback, useRef } from "react";
+
+function useEvent<T extends undefined | ((...args: any[]) => any)>(prop: T): T {
+  const ref = useRef<T>(prop);
+  if (ref.current !== prop) {
+    ref.current = prop;
+  }
+
+  const callback = useCallback((...args: any[]) => {
+    return ref.current!(...args);
+  }, []) as T;
+
+  return prop ? callback : prop;
+}
 
 function isConnectionConnecting(connection: HubConnection) {
   return (
@@ -38,4 +52,4 @@ function createConnection(
   return connection;
 }
 
-export { isConnectionConnecting, createConnection };
+export { isConnectionConnecting, createConnection, useEvent };

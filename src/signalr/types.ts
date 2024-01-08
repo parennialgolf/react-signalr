@@ -1,11 +1,10 @@
 import { HubConnection } from "@microsoft/signalr";
 import { DependencyList } from "react";
-import { ProviderProps } from "./provider";
+import { ProviderProps } from './provider/types';
 
 export interface Context<T extends Hub> {
   Provider: (Props: ProviderProps) => JSX.Element;
   connection: HubConnection | null;
-  shareConnectionBetweenTab: boolean;
   invoke: <
     E extends T["methodsName"],
     C extends Parameters<T["methods"][E]>,
@@ -19,8 +18,8 @@ export interface Context<T extends Hub> {
     callback: C,
     deps: DependencyList,
   ) => void;
-  on?: (event: string) => void;
-  off?: (event: string) => void;
+  on: (event: string, callback: (...args: any[]) => void) => void;
+  off: (event: string) => void;
 }
 
 export interface Hub<T extends string = string, M extends string = string> {

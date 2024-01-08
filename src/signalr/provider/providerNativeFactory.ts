@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useEvent } from "../../utils";
+import { useEvent } from "../utils";
 import { Context, Hub } from "../types";
 import { createConnection, isConnectionConnecting } from "../utils";
 import { ProviderProps } from "./types";
@@ -41,8 +41,7 @@ function providerNativeFactory<T extends Hub>(Context: Context<T>) {
       connection.onreconnected(() => onReconnect?.(connection));
 
       Context.connection = connection;
-      //@ts-ignore
-      Context.reOn();
+      // Context.reOn();
 
       connection.onclose((error) => {
         onClosed?.(error);
