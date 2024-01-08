@@ -2,14 +2,12 @@
   "name": "react-signalr",
   "version": "0.2.18",
   "description": "React-signalr is a tools for using signalr web socket in react/react-native apps",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
+  "main": "src/signalr/index.js",
+  "types": "src/signalr/index.d.ts",
   "keywords": [
     "react-signalr",
     "react",
     "signalr",
-    "web socket",
-    "socket",
     "microsoft"
   ],
   "dependencies": {
